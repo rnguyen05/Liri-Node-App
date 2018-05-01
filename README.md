@@ -43,71 +43,45 @@ What Each Command Should Do
 
 2. node liri.js spotify-this-song '<song name here>'
 
-This will show the following information about the song in your terminal/bash window and write query song details to log.txt
+    This will show the following information about the song in your terminal/bash window and write query song details to log.txt
 
-API used: node-spotify-api package in order to retrieve song information from the Spotify API.
+    API used: node-spotify-api package in order to retrieve song information from the Spotify API.
 
-** If no song is provided then your program will default to "The Sign" by Ace of Base.
+    ** If no song is provided then your program will default to "The Sign" by Ace of Base.
 
-Artist(s):
-The Song's Title:
-A preview link of the song from Spotify:
-The album that the song is from:
+    Artist(s):
+    The Song's Title:
+    A preview link of the song from Spotify:
+    The album that the song is from:
 
-Example data below:
+    Example data below:
 
-    ++++++++++++++ Spotify Song Info +++++++++++++
-    Artist: Backstreet Boys
-    Song Title: I Want It That Way
-    Preview Link: https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
-    Album Name: The Hits--Chapter One
+        ++++++++++++++ Spotify Song Info +++++++++++++
+        Artist: Backstreet Boys
+        Song Title: I Want It That Way
+        Preview Link: https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
+        Album Name: The Hits--Chapter One
 
 
 3. node liri.js movie-this '<movie name here>'
 
-This will show the following information to your terminal/bash window and log to log.txt file:
+    This will show the following information to your terminal/bash window and log to log.txt file:
 
-API used: The request package to retrieve data from the OMDB API.
+    API used: The request package to retrieve data from the OMDB API.
 
-** If no movie title provided then the app will output data from the movie 'Mr. Nobody.'
+    ** If no movie title provided then the app will output data from the movie 'Mr. Nobody.'
 
-* Title of the movie.
-* Year the movie came out.
-* IMDB Rating of the movie.
-* Rotten Tomatoes Rating of the movie.
-* Country where the movie was produced.
-* Language of the movie.
-* Plot of the movie.
-* Actors in the movie.
+    * Title of the movie.
+    * Year the movie came out.
+    * IMDB Rating of the movie.
+    * Rotten Tomatoes Rating of the movie.
+    * Country where the movie was produced.
+    * Language of the movie.
+    * Plot of the movie.
+    * Actors in the movie.
 
-Example data below:
+    Example data below:
 
-    ++++++++++++++ OMDB Movie Info +++++++++++++
-    Title: Face/Off
-    Release Year: 1997
-    IMDB Rating: 7.3
-    Rotten Tomatoes Rating: 82/100
-    Country Movie Produced in: USA
-    Language: English, Latin
-    Plot: In order to foil an extortion plot, an FBI agent undergoes a facial transplant surgery and assumes the identity and physical appearance of a terrorist, but the plan turns from bad to worse when the same terrorist impersonates the FBI agent.
-    Actors: John Travolta, Nicolas Cage, Joan Allen, Alessandro Nivola
-
-
-4. node liri.js do-what-it-says
-
-This will invoke readFile command using fs Node Package and read data from the random.txt. The app will execute commands in the file and show results in the terminal/bash windows and save to log.txt file.
-
-** This App can read and execute multiple lines from the file.
-
-Example data below:
-
-    1. random.txt
-    
-        spotify-this-song,I Want it That Way
-        movie-this,Face/Off
-    
-    2. result
-    
         ++++++++++++++ OMDB Movie Info +++++++++++++
         Title: Face/Off
         Release Year: 1997
@@ -117,13 +91,39 @@ Example data below:
         Language: English, Latin
         Plot: In order to foil an extortion plot, an FBI agent undergoes a facial transplant surgery and assumes the identity and physical appearance of a terrorist, but the plan turns from bad to worse when the same terrorist impersonates the FBI agent.
         Actors: John Travolta, Nicolas Cage, Joan Allen, Alessandro Nivola
-        
-        
-        ++++++++++++++ Spotify Song Info +++++++++++++
-        Artist: Backstreet Boys
-        Song Title: I Want It That Way
-        Preview Link: https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
-        Album Name: The Hits--Chapter One
+
+
+4. node liri.js do-what-it-says
+
+    This will invoke readFile command using fs Node Package and read data from the random.txt. The app will execute commands in the file and show results in the terminal/bash windows and save to log.txt file.
+
+    ** This App can read and execute multiple lines from the file.
+
+    Example data below:
+
+    1. random.txt
+    
+        spotify-this-song,I Want it That Way
+        movie-this,Face/Off
+    
+    2. result
+    
+            ++++++++++++++ OMDB Movie Info +++++++++++++
+            Title: Face/Off
+            Release Year: 1997
+            IMDB Rating: 7.3
+            Rotten Tomatoes Rating: 82/100
+            Country Movie Produced in: USA
+            Language: English, Latin
+            Plot: In order to foil an extortion plot, an FBI agent undergoes a facial transplant surgery and assumes the identity and physical appearance of a terrorist, but the plan turns from bad to worse when the same terrorist impersonates the FBI agent.
+            Actors: John Travolta, Nicolas Cage, Joan Allen, Alessandro Nivola
+
+
+            ++++++++++++++ Spotify Song Info +++++++++++++
+            Artist: Backstreet Boys
+            Song Title: I Want It That Way
+            Preview Link: https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
+            Album Name: The Hits--Chapter One
 
         
 
