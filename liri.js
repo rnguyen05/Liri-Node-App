@@ -40,16 +40,34 @@ switch (action[2]) {
         };
     break;
     case 'do-what-it-says':
-        doWhatEver();
+        doWhatItSays();
     break;
-}
+    default:
+        var notRecognized = "\n============= PLEASE USE BELOW COMMANDS =============\n"
+                            + "node liri.js my-tweets\n"
+                            + "node liri.js spotify-this-song 'song-title'\n"
+                            + "node liri.js movie 'movie-title'\n"
+                            + "node liri.js do-what-it-says\n\n";
+        console.log(notRecognized);
+        logToFile('err', 'default-commands', notRecognized);
+}//End switch case
 
 /************************** Log to File ************************/
-function logToFile (data, fromFunction) {
+function logToFile (data, fromFunction, errDetails) {
     if (data === 'err') {
-        var logIt = "\n############# ERROR" + fromFunciton + " ############"
-        + "\nThere is problem reading the random.txt file."
-        + "\nPlease check to file and try again\n";
+        if (fromFunction === 'default-commands') {
+            var logIt = "\n############# ERROR " + fromFunction + " ############"
+            + "\nUser input command is NOT RECOGNIZED.\n"
+            + errDetails
+            + "\n\n";
+        }
+        else if (fromFunction === 'do-what-it-says') {
+            var logIt = "\n############# ERROR " + fromFunction + " ############"
+            + "\nThere is an error with random.tx file.\nPlease fix the file and try again.\n"
+            + errDetails
+            + "\n\n";
+        }
+        
         fs.appendFile("log.txt", logIt, function (err) {
             if (err) {
             return console.log(fromFunction + " data was not appended to the log.txt file.");
@@ -66,29 +84,35 @@ function logToFile (data, fromFunction) {
 }//End logToFile
 
 /************************ Do What It Says **********************/
-function doWhatEver () {
+function doWhatItSays () {
    //Read data from random.txt
    fs.readFile(randomFile, 'utf8', readMe);
 
    //readMe callback function
    function readMe (err, data) {
        //Read multiple lines from input file
-        var lines = data.split('\n');
-        for (var i = 0; i < lines.length; i++) {
-            if (err) {
-                logToFile('err', 'do-what-it-says');
-                return console.log('Error occurred: ' + err);
-            }
-            var readData = lines[i].split(',');
-            action = readData[0];
-            title = readData[1];
-            if (action === 'spotify-this-song') {
-                getSong(title);
-            }
-            else if (action === 'movie-this') {
-                getMovie(title);
-            }   
-        }//End for loop
+        if (err) {
+            logToFile('err', 'do-what-it-says', err);
+            return console.log('Error Reading File random.txt: ' + err);
+        }
+        else {
+            var lines = data.split('\n');
+            for (var i = 0; i < lines.length; i++) {
+                if (err) {
+                    logToFile('err', 'do-what-it-says', err);
+                    return console.log('Error occurred: ' + err);
+                }
+                var readData = lines[i].split(',');
+                action = readData[0];
+                title = readData[1];
+                if (action === 'spotify-this-song') {
+                    getSong(title);
+                }
+                else if (action === 'movie-this') {
+                    getMovie(title);
+                }   
+            }//End for loop
+        }
    }//End of readMe
 }//End of doWhatEver
 
@@ -126,13 +150,12 @@ function getSong (title) {
         query: title,
         limit: 1
     }
-    console.log(params);
     //Spotify search query
     spotify.search (params, getSongInfo);
     //getSongInfo callback function
     function getSongInfo (err, data) {
         if (err) {
-            logToFile('err','spotify-this-song');
+            logToFile('err','spotify-this-song', err);
             return console.log('Error occurred: ' + err);
         }
         var songInfo = data.tracks.items; 
